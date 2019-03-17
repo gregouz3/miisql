@@ -1,5 +1,5 @@
 CREATE DATABASE database_food CHARACTER SET 'utf8';
-USE database_foo
+USE database_food
 
 CREATE TABLE Food_category (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -21,7 +21,7 @@ CREATE TABLE Product_data (
   ADD CONSTRAINT 'fk_food_category'
     FOREIGN KEY ('food_category_id') REFERENCES Food_category(id) ON DELETE CASCADE,
   ADD CONSTRAINT 'fk_food_substitute_id'
-    FOREIGN KEY (food_substitute_id) REFERENCES Product_data(id) ON DELETE SET NULL
+    FOREIGN KEY ('food_substitute_id') REFERENCES Product_data(id) ON DELETE SET NULL
 
 )ENGINE=INNODB;
 
