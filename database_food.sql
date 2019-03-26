@@ -1,5 +1,7 @@
 DROP DATABASE IF EXISTS database_food;
+DROP TABLE Food_category;
 CREATE DATABASE database_food CHARACTER SET 'utf8';
+GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
 USE database_food;
 
   CREATE TABLE Food_category (
@@ -13,7 +15,6 @@ USE database_food;
     category_id INT UNSIGNED NOT NULL,
     product_name VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
-    code BIGINT UNSIGNED NOT NULL,
     ingredients TEXT,
     stores TEXT,
     nutrition_grade VARCHAR(1) NOT NULL
