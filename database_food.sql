@@ -3,7 +3,6 @@ DROP TABLE Food_category;
 CREATE DATABASE database_food CHARACTER SET 'utf8';
 USE database_food;
 GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
-USE database_food;
 
   CREATE TABLE Food_category (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
