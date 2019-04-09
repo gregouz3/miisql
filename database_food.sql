@@ -17,7 +17,7 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
     url VARCHAR(255) NOT NULL,
     ingredients TEXT,
     stores TEXT,
-    nutrition_grade VARCHAR(1) NOT NULL
+    nutriscore VARCHAR(1) NOT NULL
 
   )ENGINE=INNODB;
 
