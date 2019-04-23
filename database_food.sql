@@ -13,10 +13,11 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
   CREATE TABLE Food_product (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category_id INT UNSIGNED NOT NULL,
+    category VARCHAR(255) NOT NULL,
     product_name VARCHAR(255) NOT NULL,
     url VARCHAR(255) NOT NULL,
     ingredients TEXT,
-    stores TEXT,
+    store TEXT,
     nutriscore VARCHAR(1) NOT NULL
 
   )ENGINE=INNODB;
