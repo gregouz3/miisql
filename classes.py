@@ -15,6 +15,7 @@ class Category:
 
     self.request_category = ""
     self.category = list()
+
     self.read_config_cat()
     self.get_category_data()
     self.insert_category_data()
@@ -47,11 +48,40 @@ class Category:
       print(add_category)
       cursor.execute(add_category)
       i += 1
-      if i > 4:
+      if i > 5:
         break
 
     cnx.commit()
     cursor.close()
 
+class Product:
+
+  def __init__(self):
+
+
+    self.products_name = ""
+    self.nutriscore_level = ""
+    self.categories_names = ""
+    self.url = ""
+
+
+  def add_database(self, products_name, nutriscore_level, categories_names, url):
+
+      self.products_name = products_name
+      self.nutriscore_level = nutriscore_level
+      self.categories_names = categories_names
+      self.url = url
+      cnx = mysql.connector.connect(**config)
+      cursor = cnx.cursor()
+      data_products = (self.products_name, self.nutriscore_level, self.categories_names, self.url)
+      add_product = ("""INSERT INTO Food_product(product_name, nutriscore, category, url) VALUES (%s, %s, %s, %s)""")
+      print(add_product, data_products)
+      cursor.execute(add_product, data_products)
+
+      cnx.commit()
+      cursor.close()
+
 if __name__ == '__main__':
   Category()
+  Product()
+
