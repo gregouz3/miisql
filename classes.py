@@ -45,14 +45,10 @@ class Category:
     for cat in self.category:
       cat_replace = cat['name'].replace("'","''")
       add_category = (f"INSERT INTO Food_category (category_name) VALUES ('{cat_replace}')")
-      print(add_category)
       cursor.execute(add_category)
       i += 1
-      if i > 5:
+      if i > 10:
         break
-
-    cnx.commit()
-    cursor.close()
 
 class Product:
 
@@ -63,18 +59,22 @@ class Product:
     self.nutriscore_level = ""
     self.categories_names = ""
     self.url = ""
+    self.store = ""
 
 
-  def add_database(self, products_name, nutriscore_level, categories_names, url):
+  def add_database(self, products_name, nutriscore_level, categories_names, url, store):
 
       self.products_name = products_name
       self.nutriscore_level = nutriscore_level
       self.categories_names = categories_names
       self.url = url
+      self.store = store
+
       cnx = mysql.connector.connect(**config)
       cursor = cnx.cursor()
-      data_products = (self.products_name, self.nutriscore_level, self.categories_names, self.url)
-      add_product = ("""INSERT INTO Food_product(product_name, nutriscore, category, url) VALUES (%s, %s, %s, %s)""")
+      data_products = (self.products_name, self.nutriscore_level, self.categories_names, self.url, self.store)
+      add_product = ("""INSERT INTO Food_product(product_name, nutriscore, category, url, store) VALUES (%s, %s, %s, %s, %s)""")
+
       print(add_product, data_products)
       cursor.execute(add_product, data_products)
 
