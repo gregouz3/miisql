@@ -14,37 +14,46 @@ def display_category():
     print(id_cat, ':', category_name)
 
 
-def choose_category_1(category_choose):
+def choose_category(category_choose):
 
   cnx = mysql.connector.connect(**config)
   cursor = cnx.cursor()
-  cursor.execute(select_cat_prod_1)
-  print(select_cat_prod_1)
+
+  cursor.execute(select_cat_prod, category_choose)
+  print(select_cat_prod)
   for id_prod, product_name, nutriscore in cursor:
-    print(id_prod, '|', product_name, ':', nutriscore)
+    print(id_prod, ':', product_name, ' : ( nutriscore : ', nutriscore, ')')
 
 
-def choose_category_2(category_choose):
+def choose_product(id_prod):
 
   cnx = mysql.connector.connect(**config)
   cursor = cnx.cursor()
-  cursor.execute(select_cat_prod_2)
-  for id_prod, product_name, nutriscore in cursor:
-    print(id_prod, '|', product_name, ':', nutriscore)
+  cursor.execute(select_prod, id_prod)
+  for id_prod, product_name, nutriscore, store, url in cursor:
+    print('\n Vous avez choisi : ' ,product_name, ', son nutriscore est de ', nutriscore, ', vous pouvez trouver ce produit ici --> ', store, ',\n et voici son url pour plus dinfo :', url)
+
+
 
 if __name__ == '__main__':
 
-  cnx = mysql.connector.connect(**config)
-  cursor = cnx.cursor()
-  display_category()
-  category_choose = (int(input("Selectionnez la catégorie: ")))
-  print(category_choose)
-  if category_choose == 1:
-    choose_category_1(1)
+  loop = True
+  while loop:
+      cnx = mysql.connector.connect(**config)
+      cursor = cnx.cursor()
+      proposals = int(input("1- Looking for a product to substitute? \n"
+                            "2-  \n"
+                            "3- Exit -OpenFoodSubstitute-\n"
+                            "Select a proposal :  "))
+      if proposals == 3:
+        loop = False
 
-  if category_choose == 2:
-
-    choose_category_2(2)
-
-  cnx.commit()
-  cursor.close()
+      if proposals == 1:
+        display_category()
+        category_choose = (int(input("Select a category: ")),)
+        choose_category(category_choose)
+        id_prod = (int(input("Select a product: ")),)
+        choose_product(id_prod)
+        loop = False
+      cnx.commit()
+      cursor.close()
