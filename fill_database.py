@@ -14,7 +14,7 @@ def read_config_prod(category, category_id):
     request_url = requests.get(url)
     products = request_url.json()
 
-    nb_pages = 5
+    nb_pages = 3
     while nb_pages > 0:
 
       url = "{}/{}/{}.{}".format(url_cat, category, nb_pages_url, url_json)
@@ -54,7 +54,7 @@ if __name__ == '__main__':
   cnx = mysql.connector.connect(**config)
   cursor = cnx.cursor()
   read_config_cat_prod()
-  read_config_prod("Viandes", 1)
+  read_config_prod("Sandwichs", 1)
   read_config_prod("Boissons", 2)
 
   cnx.commit()
