@@ -47,8 +47,10 @@ class Category:
       add_category = (f"INSERT INTO Food_category (category_name) VALUES ('{cat_replace}')")
       cursor.execute(add_category)
       i += 1
-      if i > 10:
+      if i > 9:
         break
+    cnx.commit()
+    cursor.close()
 
 class Product:
 
@@ -57,26 +59,26 @@ class Product:
 
     self.products_name = ""
     self.nutriscore_level = ""
-    self.categories_names = ""
     self.url = ""
     self.store = ""
+    self.category_id = 1
 
 
-  def add_database(self, products_name, nutriscore_level, categories_names, url, store):
+
+  def add_database(self, products_name, nutriscore_level, url, store, category_id):
 
       self.products_name = products_name
       self.nutriscore_level = nutriscore_level
-      self.categories_names = categories_names
       self.url = url
       self.store = store
+      self.category_id = category_id
 
       cnx = mysql.connector.connect(**config)
       cursor = cnx.cursor()
-      data_products = (self.products_name, self.nutriscore_level, self.categories_names, self.url, self.store)
-      add_product = ("""INSERT INTO Food_product(product_name, nutriscore, category, url, store) VALUES (%s, %s, %s, %s, %s)""")
+      data_products = (self.products_name, self.nutriscore_level,self.url, self.store, self.category_id)
 
-      print(add_product, data_products)
       cursor.execute(add_product, data_products)
+      print(add_product, data_products)
 
       cnx.commit()
       cursor.close()
@@ -84,4 +86,3 @@ class Product:
 if __name__ == '__main__':
   Category()
   Product()
-

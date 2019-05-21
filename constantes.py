@@ -20,7 +20,6 @@ select_cat = ("""SELECT * FROM Food_category""")
 
 select_cat_prod = ("SELECT id_prod, product_name, nutriscore FROM Food_product INNER JOIN Food_category ON Food_product.category_id = Food_category.id_cat WHERE Food_category.id_cat = %s")
 
-select_prod = ("""SELECT id_prod, product_name, nutriscore, store, url FROM Food_product WHERE Food_product.id_prod = %s""")
+select_prod = ("""SELECT id_prod, product_name, nutriscore, store, url FROM Food_product WHERE  Food_product.id_prod = %s""")
 
-
-
+select_prod_subs = ("""SELECT product_name, nutriscore, store, url FROM Food_product WHERE  nutriscore < 'b' AND category_id = %s""")

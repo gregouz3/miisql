@@ -21,7 +21,6 @@ def read_config_prod(category, category_id):
       request_url = requests.get(url)
       products = request_url.json()
       print(url)
-      i = 0
       products_name = ""
       nutriscore_level = ""
       store = ""
