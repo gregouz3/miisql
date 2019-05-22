@@ -22,4 +22,10 @@ select_cat_prod = ("SELECT id_prod, product_name, nutriscore FROM Food_product I
 
 select_prod = ("""SELECT id_prod, product_name, nutriscore, store, url FROM Food_product WHERE  Food_product.id_prod = %s""")
 
-select_prod_subs = ("""SELECT product_name, nutriscore, store, url FROM Food_product WHERE  nutriscore < 'b' AND category_id = %s""")
+select_prod_subs = ("""SELECT product_name, nutriscore, store, url, category_id FROM Food_product WHERE  nutriscore < 'b' AND category_id = %s""")
+
+fill_substitute = ("""INSERT INTO Food_substitute(substitute_name, nutriscore, store, url, category_id) VALUES (%s, %s, %s, %s, %s)""")
+
+select_subs = ("""SELECT id_subs, substitute_name, nutriscore, store, url FROM Food_substitute""")
+
+delet_subs = ("""DROP TABLE Food_substitute""")

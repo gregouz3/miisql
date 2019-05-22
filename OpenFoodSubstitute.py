@@ -35,12 +35,23 @@ def choose_product(id_prod):
 def substitute_product():
 
   cnx = mysql.connector.connect(**config)
-  cursor = cnx.cursor()
+  cursor = cnx.cursor(buffered = True)
   cursor.execute(select_prod_subs, category_choose)
 
-  for product_name, nutriscore, store, url in cursor:
+  for product_name, nutriscore, store, url, category_id in cursor:
       print('\n Voici un substitut : ', product_name,', son nutriscore est de : ', nutriscore, ', vous pouvez acheter ce produit à ', store, ',\n Lien vers OpenFoodFact :', url)
+      add_substitute = (product_name, nutriscore, store, url, category_id)
+      cursor.execute(fill_substitute, add_substitute)
+      print(fill_substitute, add_substitute)
+      cnx.commit()
       break
+
+
+def display_substitute():
+
+  cnx = mysql.connector.connect(**config)
+  cursor = cnx.cursor()
+  cursor.execute(select_subs)
 
 if __name__ == '__main__':
 
@@ -59,6 +70,18 @@ if __name__ == '__main__':
         id_prod = (int(input("Selectionnez un aliment: ")),)
         choose_product(id_prod)
         substitute_product()
-        loop = False
-      cnx.commit()
-      cursor.close()
+        record_subs = (int(input("\nVoulez-vous enregistré ce substitut ?\n 1-Oui  2-Non ")))
+        if record_subs == 1:
+          pass
+        if  record_subs == 2:
+          cursor.execute(delet_subs)
+          cnx.commit()
+
+      if proposals == 2:
+        cursor.execute(select_subs)
+        for id_subs, substitute_name, nutriscore, store, url in cursor:
+          print('\n',id_subs, ':', substitute_name, ',nutriscore : ',nutriscore, ', Magasin :', store,'\nLien vers OpenFoodFact: ',url)
+
+
+  cnx.commit()
+  cursor.close()

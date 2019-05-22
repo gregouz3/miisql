@@ -19,9 +19,9 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
     PRIMARY KEY (id_prod)
   )ENGINE=INNODB;
 
-
   CREATE TABLE Food_substitute (
     id_subs INT UNSIGNED AUTO_INCREMENT,
+    category_id INT UNSIGNED NOT NULL,
     substitute_name VARCHAR(255) DEFAULT NULL,
     url VARCHAR(255) NOT NULL,
     nutriscore VARCHAR(1) DEFAULT NULL,
@@ -32,5 +32,5 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
   ALTER TABLE Food_product
   ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES Food_category(id_cat);
   ALTER TABLE Food_substitute
-  ADD CONSTRAINT fk_product_source_id FOREIGN KEY (id_subs) REFERENCES Food_product(id_prod);
+  ADD CONSTRAINT fk_product_source_id FOREIGN KEY (category_id) REFERENCES Food_category(id_cat);
 
