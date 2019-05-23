@@ -33,4 +33,3 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
   ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES Food_category(id_cat);
   ALTER TABLE Food_substitute
   ADD CONSTRAINT fk_product_source_id FOREIGN KEY (category_id) REFERENCES Food_category(id_cat);
-

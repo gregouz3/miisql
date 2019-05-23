@@ -7,8 +7,6 @@ import requests
 import mysql.connector
 from constantes import *
 
-
-
 class Category:
 
   def __init__(self):
@@ -46,6 +44,7 @@ class Category:
       cat_replace = cat['name'].replace("'","''")
       add_category = (f"INSERT INTO Food_category (category_name) VALUES ('{cat_replace}')")
       cursor.execute(add_category)
+      print(add_category, cat_replace)
       i += 1
       if i > 9:
         break
@@ -55,7 +54,6 @@ class Category:
 class Product:
 
   def __init__(self):
-
 
     self.products_name = ""
     self.nutriscore_level = ""

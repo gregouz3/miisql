@@ -14,7 +14,7 @@ config = {
 
 add_product = ("""INSERT INTO Food_product(product_name, nutriscore, url, store, category_id) VALUES (%s, %s, %s, %s, %s)""")
 
-fill_cat = ("""INSERT INTO Food_category (category_name) VALUES ("Sandwichs"), ("Boissons")""")
+fill_cat = ("""INSERT INTO Food_category (category_name) VALUES ("Sandwichs"), ("Snacks"), ("Boissons sans alcool"), ("Viandes"), ("Snacks sucrés")""")
 
 select_cat = ("""SELECT * FROM Food_category""")
 
@@ -26,6 +26,6 @@ select_prod_subs = ("""SELECT product_name, nutriscore, store, url, category_id 
 
 fill_substitute = ("""INSERT INTO Food_substitute(substitute_name, nutriscore, store, url, category_id) VALUES (%s, %s, %s, %s, %s)""")
 
-select_subs = ("""SELECT id_subs, substitute_name, nutriscore, store, url FROM Food_substitute""")
+select_subs = ("""SELECT id_subs, substitute_name, nutriscore, store, url FROM Food_substitute """)
 
-delet_subs = ("""DROP TABLE Food_substitute""")
+delet_subs = ("""DELETE FROM Food_substitute WHERE category_id = %s""")
