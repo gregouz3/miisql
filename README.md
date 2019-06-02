@@ -10,4 +10,3 @@ Fonctionnalité 2 :
 
 Le programme permet de renvoyer à l'utilisateur l'ensemble de ces produits sauvegardés dans la base de données.
 
-
