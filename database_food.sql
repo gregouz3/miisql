@@ -3,6 +3,7 @@ CREATE DATABASE database_food CHARACTER SET 'utf8';
 USE database_food;
 GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
 
+  # Create Category, Product, and Substitute tables
   CREATE TABLE Food_category (
     id_cat INT UNSIGNED AUTO_INCREMENT NOT NULL,
     category_name VARCHAR(255) NOT NULL,
@@ -30,6 +31,7 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
     PRIMARY KEY (id_subs)
   )ENGINE=INNODB;
 
+  # Foreign key
   ALTER TABLE Food_product
   ADD CONSTRAINT fk_category_id FOREIGN KEY (category_id) REFERENCES Food_category(id_cat);
   ALTER TABLE Food_substitute
