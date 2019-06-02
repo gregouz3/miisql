@@ -39,4 +39,5 @@ SELECT_SUB_STORE = ("""SELECT category_id, id_prod, product_name, nutriscore, st
                     FROM Food_product WHERE category_id = %s
                     AND nutriscore = 'a' AND store <> '' LIMIT 1""")
 
-SELECT_SUBS = ("""SELECT * FROM Food_substitute """)
+SELECT_SUBS = ("""SELECT id_subs, category_id, product_id, substitute_name, nutriscore, store, url
+               FROM Food_substitute """)
