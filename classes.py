@@ -5,7 +5,7 @@
 import json
 import requests
 import mysql.connector
-from constantes import *
+from constants import *
 
 class Category:
 
@@ -44,7 +44,6 @@ class Category:
       cat_replace = cat['name'].replace("'","''")
       add_category = (f"INSERT INTO Food_category (category_name) VALUES ('{cat_replace}')")
       cursor.execute(add_category)
-      print(add_category, cat_replace)
       i += 1
       if i > 9:
         break
@@ -59,6 +58,7 @@ class Product:
     self.nutriscore_level = ""
     self.url = ""
     self.store = ""
+    self.id_prod = 0
     self.category_id = 1
 
 
@@ -76,11 +76,27 @@ class Product:
       data_products = (self.products_name, self.nutriscore_level,self.url, self.store, self.category_id)
 
       cursor.execute(add_product, data_products)
-      print(add_product, data_products)
 
       cnx.commit()
       cursor.close()
 
+  def product_selected(self, p_id):
+
+      cnx = mysql.connector.connect(**config)
+      cursor = cnx.cursor()
+      cursor.execute(select_prod, p_id)
+
+      for id_prod, category_id, product_name, nutriscore, store, url in cursor:
+          self.id_prod = id_prod
+          self.category_id = category_id
+          self.products_name = product_name
+          self.nutriscore_level = nutriscore
+          self.url = url
+          self.store = store
+
+  def display_product(self):
+
+      print("\n Vous avez sélectionné : {} de la categorie n° {}, son nutriscore est de : {}.\n Ce produit est en vente à {} .\n Le lien OpenFoodFact : {} \n".format(self.products_name, self.category_id, self.nutriscore_level, self.store, self.url))
 if __name__ == '__main__':
   Category()
   Product()

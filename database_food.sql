@@ -22,6 +22,7 @@ GRANT ALL PRIVILEGES ON database_food.* TO 'P5'@'localhost';
   CREATE TABLE Food_substitute (
     id_subs INT UNSIGNED AUTO_INCREMENT,
     category_id INT UNSIGNED NOT NULL,
+    product_id INT UNSIGNED NOT NULL,
     substitute_name VARCHAR(255) DEFAULT NULL,
     url VARCHAR(255) NOT NULL,
     nutriscore VARCHAR(1) DEFAULT NULL,

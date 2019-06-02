@@ -2,7 +2,7 @@ import json
 import requests
 import mysql.connector
 from classes import *
-from constantes import *
+from constants import *
 
 def read_config_prod(category, category_id):
 
@@ -49,11 +49,9 @@ if __name__ == '__main__':
   cnx = mysql.connector.connect(**config)
   cursor = cnx.cursor()
   read_config_cat_prod()
-  read_config_prod("Sandwichs", 1)
-  read_config_prod("Snacks", 2)
-  read_config_prod("Boissons sans alcool", 3)
-  read_config_prod("Viandes", 4)
-  read_config_prod("Snacks sucrés", 5)
+  read_config_prod("Volailles", 1)
+  read_config_prod("Sandwichs", 2)
+  read_config_prod("Compotes", 3)
   cnx.commit()
   cursor.close()
   cnx.close()
