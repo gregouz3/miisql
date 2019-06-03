@@ -13,12 +13,15 @@ from constants import CONFIG, ADD_PRODUCT, SELECT_PROD
 
 
 class Category():
-    '''The class category. Recover Openfoodfact Categories'''
+    '''The class category. Recover OpenFoodFact categories'''
 
     def __init__(self):
 
         self.request_category = ""
         self.category = list()
+        self.read_config_cat()
+        self.get_category_data()
+        self.insert_category_data()
 
     def read_config_cat(self):
         '''Read config json'''
@@ -42,9 +45,9 @@ class Category():
         nb_cat = 0
         for cat in self.category:
             cat_replace = cat['name'].replace("'", "''")
-            add_category = ("""INSERT INTO Food_category (category_name)"
-                            " VALUES ('{cat_replace}')""")
+            add_category = (f"INSERT INTO Food_category (category_name) VALUES ('{cat_replace}')")
             cursor.execute(add_category)
+            print(add_category)
             nb_cat += 1
             # For 10 categories
             if nb_cat > 9:
@@ -106,3 +109,6 @@ class Product():
               "Le lien OpenFoodFact : {}\n"
               .format(self.products_name, self.category_id, self.nutriscore_level, self.store,
                       self.url))
+
+if __name__ == '__main__':
+    Category()
